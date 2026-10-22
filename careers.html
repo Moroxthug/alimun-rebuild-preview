@@ -407,7 +407,10 @@ body {
           .join_step.is-current { background-color: var(--green); }
           .join_step h3 { margin: 0 0 .9rem; }
           .join_step p { margin: 0; color: rgba(8, 8, 8, .75); }
-          .join_cta { margin-top: 3rem; display: flex; justify-content: center; }
+          .join_cta { margin-top: 3rem; display: flex; justify-content: center; opacity: var(--join-c, 1); transform: translateY(calc((1 - var(--join-c, 1)) * 2rem)) scale(calc(.9 + var(--join-c, 1) * .1)); }
+          .join_head h2 { opacity: calc(.15 + var(--join-h, 1) * .85); transform: translateX(calc((1 - var(--join-h, 1)) * -4rem)); }
+          .join_head p { opacity: var(--join-h, 1); transform: translateX(calc((1 - var(--join-h, 1)) * 4rem)); }
+          .join_step.is-current { transform: translateY(-.5rem); }
           @media (max-width: 767px) {
             .join { padding: 5rem 0; }
             .join_head { flex-direction: column; align-items: flex-start; margin-bottom: 2.5rem; }
@@ -446,8 +449,14 @@ body {
             var root = document.currentScript.closest(".join");
             var track = root.querySelector(".join_track");
             var steps = [].slice.call(root.querySelectorAll(".join_step"));
+            var head = root.querySelector(".join_head"), cta = root.querySelector(".join_cta");
             function update() {
               var r = track.getBoundingClientRect(), vh = window.innerHeight;
+              // The heading and its line slide in from opposite sides; the button rises in once the last stage is lit.
+              var h = Math.min(1, Math.max(0, (vh - head.getBoundingClientRect().top) / (vh * 0.4)));
+              root.style.setProperty("--join-h", h.toFixed(3));
+              var c = Math.min(1, Math.max(0, (vh - cta.getBoundingClientRect().top) / (vh * 0.25)));
+              root.style.setProperty("--join-c", c.toFixed(3));
               var p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.45)));
               track.style.setProperty("--join-p", p.toFixed(3));
               var reached = Math.min(steps.length, Math.floor(p * steps.length + 0.35));
@@ -463,7 +472,281 @@ body {
         </script>
       </section>
 
+          <section data-w-id="4500f34f-ad71-c737-340f-a39b6520a855" class="section is-bottom-cta">
+        <div class="container-large">
+          <div data-w-id="4500f34f-ad71-c737-340f-a39b6520a857" class="bottom-cta_wrap">
+            <div class="max-width-700">
+              <h2 class="heading-style-h1"><span class="is-word is-1" data-i18n="careers_cta_ready_title">Ready to teach?</span></h2>
+            </div>
+            <div class="bottom-cta_box" style="background-color: #ffffff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 10px 40px rgba(0,0,0,0.02);">
+              <!-- Typography sequence animation with white background -->
+              <style>
+                .alimun-cta-adv-container {
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  font-family: 'Satoshi', 'Inter', sans-serif;
+                  overflow: hidden;
+                }
+                .alimun-cta-adv-text {
+                  font-size: 5vw;
+                  font-weight: 800;
+                  color: #080808;
+                  text-transform: uppercase;
+                  letter-spacing: -0.03em;
+                  position: absolute;
+                  opacity: 0;
+                  text-align: center;
+                  width: 100%;
+                  transform: scale(0.95) translateY(10px);
+                  animation: ctaAdvSequence 15s infinite ease-in-out;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 1rem;
+                  flex-wrap: wrap;
+                  padding: 0 2rem;
+                }
+                .alimun-cta-highlight {
+                  background-color: #ceff65;
+                  color: #080808;
+                  padding: 0.1em 0.5em;
+                  border-radius: 5rem;
+                  display: inline-block;
+                  box-shadow: 0 4px 15px rgba(206, 255, 101, 0.3);
+                }
+                
+                /* Timings for the four phrases */
+                .cta-phrase-1 { animation-delay: 0s; }
+                .cta-phrase-2 { animation-delay: 3s; }
+                .cta-phrase-3 { animation-delay: 6s; }
+                .cta-phrase-4 { animation-delay: 9s; }
+
+                @keyframes ctaAdvSequence {
+                  0% {
+                    opacity: 0;
+                    transform: scale(0.95) translateY(10px);
+                  }
+                  1.5%, 17% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                  }
+                  18.5%, 100% {
+                    opacity: 0;
+                    transform: scale(1.02) translateY(-10px);
+                  }
+                }
+
+                /* Dark Logo screen animation for bottom CTA */
+                .alimun-cta-logo-anim {
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  opacity: 0;
+                  transform: scale(0.8);
+                  animation: ctaLogoSequence 15s infinite ease-in-out;
+                  pointer-events: none;
+                }
+                
+                .alimun-cta-logo-anim img {
+                  width: 45vw;
+                  max-width: 450px;
+                  height: auto;
+                }
+
+                @keyframes ctaLogoSequence {
+                  0%, 78% {
+                    opacity: 0;
+                    transform: scale(0.8);
+                  }
+                  82%, 96% {
+                    opacity: 1;
+                    transform: scale(1);
+                  }
+                  98%, 100% {
+                    opacity: 0;
+                    transform: scale(1.05);
+                  }
+                }
+
+                /* Subtle background grid effect for CTA */
+                .alimun-cta-grid-bg {
+                  position: absolute;
+                  inset: 0;
+                  background-image: 
+                    radial-gradient(circle at 1px 1px, rgba(206, 255, 101, 0.3) 1.5px, transparent 0);
+                  background-size: 30px 30px;
+                  opacity: 0.5;
+                  animation: ctaGridFloat 30s infinite linear;
+                }
+                
+                @keyframes ctaGridFloat {
+                  from { background-position: 0 0; }
+                  to { background-position: 30px 30px; }
+                }
+
+                @media (max-width: 768px) {
+                  .alimun-cta-adv-text {
+                    font-size: 8vw;
+                    gap: 0.5rem;
+                  }
+                  .alimun-cta-logo-anim img {
+                    width: 70vw;
+                  }
+                }
+              </style>
+
+              <div class="alimun-cta-adv-container">
+                <div class="alimun-cta-grid-bg"></div>
+                
+                <!-- Word-on-screen publicity phrases -->
+                <div class="alimun-cta-adv-text cta-phrase-1" data-i18n-html="careers_carousel_1">Tired of repetitive 1:1 classes?</div>
+                <div class="alimun-cta-adv-text cta-phrase-2" data-i18n-html="careers_carousel_2">Want to scale your impact?</div>
+                <div class="alimun-cta-adv-text cta-phrase-3" data-i18n-html="careers_carousel_3">Want a flexible schedule?</div>
+                <div class="alimun-cta-adv-text cta-phrase-4" data-i18n-html="careers_carousel_4">Teach on Alimun.</div>
+                
+                <!-- Final Logo Animation -->
+                <div class="alimun-cta-logo-anim">
+                  <img src="images/alimun-logo.svg" alt="Alimun Logo">
+                </div>
+              </div>
+            </div>
+            <div class="max-width-full">
+              <a href="signup.html?role=teacher" class="button is-secondary w-inline-block">
+                <p data-i18n="careers_cta_apply">Apply as teacher</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
   </main>
+      <footer class="section is-footer">
+      <div class="container-large">
+        <div class="margin-bottom-64">
+          <div class="wrap_flex is-align-top">
+            <div class="max-width-250">
+              <div class="margin-bottom-8">
+                <a href="index.html" class="heading-style-h5">ali mun</a>
+              </div>
+              <p class="text-size-medium" data-i18n="footer_desc">Anywhere, everywhere. Education on the go.</p>
+            </div>
+            <ul role="list" class="footer_links">
+              <li class="footer_link-item">
+                <a href="tiers.html" class="footer_link w-inline-block">
+                  <div class="z-index-2">
+                    <div data-i18n="footer_tiers">Tiers</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+              <li class="footer_link-item">
+                <a href="services.html" class="footer_link w-inline-block">
+                  <div class="z-index-2">
+                    <div data-i18n="footer_services">Services</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+              <li class="footer_link-item">
+                <a href="corporate.html" class="footer_link w-inline-block">
+                  <div class="z-index-2">
+                    <div data-i18n="footer_corporate">Corporate</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+              <li class="footer_link-item">
+                <a href="about-us.html" class="footer_link w-inline-block">
+                  <div class="z-index-2">
+                    <div data-i18n="nav_about">About</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+              <li class="footer_link-item">
+                <a href="careers.html" aria-current="page" class="footer_link w-inline-block w--current">
+                  <div class="z-index-2">
+                    <div data-i18n="footer_careers">Careers</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+              <li class="footer_link-item">
+                <a href="contact.html" class="footer_link w-inline-block">
+                  <div class="z-index-2">
+                    <div data-i18n="nav_contact">Contact</div>
+                  </div>
+                  <div class="link_line"></div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="margin-bottom-64">
+          <div class="wrap_flex is-align-top">
+            <div class="max-width-440">
+              <div class="margin-bottom-8">
+                <p class="heading-style-h2" data-i18n="footer_be_informed">Be informed on our progress!</p>
+              </div>
+              <p class="text-size-medium" data-i18n="footer_newsletter_desc">Join our newsletter to stay up to date on our launch progress.</p>
+            </div>
+            <div class="email-form_wrap w-form">
+              <form id="wf-form-Subscribe-Form" name="wf-form-Subscribe-Form" data-name="Subscribe Form" method="get" class="email_form" data-wf-page-id="68d948d23b6c9f2bbbac3eab" data-wf-element-id="d0e80abc-0b67-11d7-2a38-8a77c9d01eba">
+                <div class="form-field-wrapper"><input class="form-input w-input" maxlength="256" name="email" data-name="email" placeholder="Enter your email" type="email" id="email-4" required=""></div><input type="submit" data-wait="Please wait..." class="button w-button" value="Subscribe">
+              </form>
+              <div class="form-success w-form-done">
+                <div data-i18n="newsletter_success">Thank you! Your submission has been received!</div>
+              </div>
+              <div class="form-error w-form-fail">
+                <div data-i18n="newsletter_error">Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer_copyright">
+          <div class="opacity-60">
+            <div class="footer_copyright-inner" style="display:flex; gap:1.25rem; flex-wrap:wrap; align-items:center;">
+              <p class="text-size-regular" data-i18n="footer_copyright">© 2025 Alimun. All rights reserved.</p>
+              <a href="terms.html" style="color:inherit; text-decoration:none; opacity:0.8; font-size:0.82rem;" data-i18n="footer_terms">Terms &amp; Conditions</a>
+              <a href="cookies.html" style="color:inherit; text-decoration:none; opacity:0.8; font-size:0.82rem;" data-i18n="footer_cookie_policy">Cookie Policy</a>
+              <a href="gdpr.html" style="color:inherit; text-decoration:none; opacity:0.8; font-size:0.82rem;">GDPR Policy</a>
+              <a href="#" id="open-cookie-settings" style="color:inherit; text-decoration:none; opacity:0.8; font-size:0.82rem;">Manage Cookies</a>
+            </div>
+          </div>
+          <ul role="list" class="social-links">
+            <li class="social-links_item">
+              <a href="#" class="social-link w-inline-block"><img src="images/x-icon.svg" loading="lazy" alt="" class="icon-24">
+                <div class="link-box"></div>
+              </a>
+            </li>
+            <li class="social-links_item">
+              <a href="#" class="social-link w-inline-block"><img src="images/yt-icon.svg" loading="lazy" alt="" class="icon-24">
+                <div class="link-box"></div>
+              </a>
+            </li>
+            <li class="social-links_item">
+              <a href="#" class="social-link w-inline-block"><img src="images/fb-icon.svg" loading="lazy" alt="" class="icon-24">
+                <div class="link-box"></div>
+              </a>
+            </li>
+            <li class="social-links_item">
+              <a href="#" class="social-link w-inline-block"><img src="images/ig-icon.svg" loading="lazy" alt="" class="icon-24">
+                <div class="link-box"></div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
 
   </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=68d948d03b6c9f2bbbac3e5b" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
