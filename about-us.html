@@ -160,95 +160,206 @@ body {
         </div>
       </section>
 
-          <section class="section langs">
+          <section class="section paths">
         <style>
-          .langs { overflow: clip; }
-          .langs_wrap { display: flex; flex-direction: column; align-items: center; text-align: center; }
-          .langs_title { font-family: Coolvetica Condensed, sans-serif; text-transform: uppercase; font-weight: 400; line-height: 1; font-size: clamp(3.5rem, 11vw, 10rem); margin: 0; transform: translateY(calc((1 - var(--langs-p, 1)) * 4rem)) scale(calc(.9 + var(--langs-p, 1) * .1)); opacity: calc(.2 + var(--langs-p, 1) * .8); }
-          .langs_pill { display: inline-flex; align-items: center; justify-content: center; vertical-align: bottom; background-color: var(--green); color: var(--black); border-radius: 5rem; padding: 0 .3em; height: 1.05em; overflow: hidden; position: relative; }
-          .langs_word { display: block; transition: transform .6s cubic-bezier(.215, .61, .355, 1), opacity .6s ease; }
-          .langs_word.is-out { transform: translateY(-110%); opacity: 0; }
-          .langs_word.is-in { transform: translateY(110%); opacity: 0; transition: none; }
-          .langs_text { max-width: 44rem; margin: 2.5rem auto 0; }
-          .langs .button { margin-top: 2rem; width: fit-content; }
-          @media (prefers-reduced-motion: reduce) {
-            .langs_title { transform: none; opacity: 1; }
-            .langs_word { transition: none; }
-          }
+          .paths_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+          .paths_card { display: flex; flex-direction: column; opacity: 0; transform: translateY(2rem); transition: opacity .8s ease, transform .8s cubic-bezier(.215, .61, .355, 1); }
+          .paths_card.is-in { opacity: 1; transform: none; }
+          .paths_card:nth-child(2) { transition-delay: .15s; }
+          .paths_img { aspect-ratio: 4 / 5; border-radius: 2.25rem; overflow: hidden; }
+          .paths_img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+          .paths_card h2 { margin: 2rem 0 0; }
+          .paths_card p { margin: 1rem 0 0; max-width: 34rem; }
+          .paths .button { margin-top: 1.75rem; width: fit-content; }
+          @media (max-width: 767px) { .paths_grid { grid-template-columns: 1fr; gap: 4rem; } .paths_img { aspect-ratio: 4 / 3.4; } }
+          @media (prefers-reduced-motion: reduce) { .paths_card { opacity: 1; transform: none; transition: none; } }
         </style>
         <div class="container-large">
-          <div class="langs_wrap">
-            <h2 class="langs_title"><span data-i18n="about_langs_learn">Learn</span> <span class="langs_pill"><span class="langs_word" data-words="English|German">English</span></span> <span data-i18n="about_langs_live">live</span></h2>
-            <p class="text-size-large langs_text" data-i18n="about_langs_desc">Classes are open in English and German. Spanish, French, Portuguese, Italian, Mandarin, Japanese and Arabic have a free waitlist, and we email you as soon as your language opens.</p>
-            <a href="signup.html" class="button w-inline-block">
-              <p data-i18n="services_tier_btn">Start today</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
-            </a>
+          <div class="paths_grid">
+            <div class="paths_card">
+              <div class="paths_img shadow-card"><img src="images/pexels-learner-video-call-5486102.jpg" loading="lazy" alt="A learner on a video call, taking notes"></div>
+              <h2 class="heading-style-h3" data-i18n="about_learn_title">Learn English or German live</h2>
+              <p class="text-size-medium" data-i18n="about_learn_desc">Classes are open in English and German. Spanish, French, Portuguese, Italian, Mandarin, Japanese and Arabic have a free waitlist, and we email you as soon as your language opens.</p>
+              <a href="signup.html" class="button w-inline-block">
+                <p data-i18n="services_tier_btn">Start today</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
+              </a>
+            </div>
+            <div class="paths_card">
+              <div class="paths_img shadow-card"><img src="images/pexels-teacher-online-6267032.jpg" loading="lazy" alt="A teacher teaching an online class"></div>
+              <h2 class="heading-style-h3" data-i18n="about_teach_title">Teach with Alimun</h2>
+              <p class="text-size-medium" data-i18n="about_teach_desc">Are you a language teacher? We are building our teaching team. See how teaching at Alimun works and apply on our careers page.</p>
+              <a href="careers.html" class="button w-inline-block">
+                <p data-i18n="about_teach_btn">See careers</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
+              </a>
+            </div>
           </div>
         </div>
         <script>
+          // Each card fades up once when it comes into view.
           (function () {
-            var root = document.currentScript.closest(".langs");
-            var title = root.querySelector(".langs_title");
-            var word = root.querySelector(".langs_word");
-            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            // The heading rises and grows into place as the section scrolls in.
-            function update() {
-              var r = root.getBoundingClientRect(), vh = window.innerHeight;
-              var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.6)));
-              title.style.setProperty("--langs-p", p.toFixed(3));
-            }
-            if (!reduce) { window.addEventListener("scroll", update, { passive: true }); window.addEventListener("resize", update); update(); }
-            // The highlighted word swaps between the open languages.
-            var words = (word.getAttribute("data-words") || "").split("|"), i = 0;
-            if (words.length > 1) setInterval(function () {
-              i = (i + 1) % words.length;
-              if (reduce) { word.textContent = words[i]; return; }
-              word.classList.add("is-out");
-              setTimeout(function () {
-                word.textContent = words[i];
-                word.classList.remove("is-out"); word.classList.add("is-in");
-                void word.offsetWidth;
-                word.classList.remove("is-in");
-              }, 600);
-            }, 2600);
+            var cards = document.currentScript.closest(".paths").querySelectorAll(".paths_card");
+            if (!("IntersectionObserver" in window)) { cards.forEach(function (c) { c.classList.add("is-in"); }); return; }
+            var io = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
+            }, { threshold: 0.2 });
+            cards.forEach(function (c) { io.observe(c); });
           })();
         </script>
       </section>
 
-          <section class="section teach">
-        <style>
-          .teach_card { background-color: var(--black); color: var(--white); border-radius: 3.125rem; padding: 6rem 3rem; text-align: center; display: flex; flex-direction: column; align-items: center; transform: scale(calc(.88 + var(--teach-p, 1) * .12)); opacity: calc(.3 + var(--teach-p, 1) * .7); }
-          .teach_card h2 { margin: 0; }
-          .teach_text { max-width: 40rem; margin: 1.75rem auto 0; opacity: .8; }
-          .teach .button { margin-top: 2rem; width: fit-content; }
-          @media (max-width: 767px) { .teach_card { padding: 4rem 1.5rem; border-radius: 2.25rem; } }
-          @media (prefers-reduced-motion: reduce) { .teach_card { transform: none; opacity: 1; } }
-        </style>
+          <section data-w-id="4500f34f-ad71-c737-340f-a39b6520a855" class="section is-bottom-cta">
         <div class="container-large">
-          <div class="teach_card">
-            <h2 class="heading-style-h1" data-i18n="about_teach_title">Teach with Alimun</h2>
-            <p class="text-size-large teach_text" data-i18n="about_teach_desc">Are you a language teacher? We are building our teaching team. See how teaching at Alimun works and apply on our careers page.</p>
-            <a href="careers.html" class="button w-inline-block">
-              <p data-i18n="about_teach_btn">See careers</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
-            </a>
+          <div data-w-id="4500f34f-ad71-c737-340f-a39b6520a857" class="bottom-cta_wrap">
+            <div class="max-width-700">
+              <h2 class="heading-style-h1"><span class="is-word is-1" data-i18n="cta_ready_to_learn">Ready to learn?</span></h2>
+            </div>
+            <div class="bottom-cta_box" style="background-color: #ffffff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 10px 40px rgba(0,0,0,0.02);">
+              <!-- Typography sequence animation with white background -->
+              <style>
+                .alimun-cta-adv-container {
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  font-family: 'Satoshi', 'Inter', sans-serif;
+                  overflow: hidden;
+                }
+                .alimun-cta-adv-text {
+                  font-size: 5vw;
+                  font-weight: 800;
+                  color: #080808;
+                  text-transform: uppercase;
+                  letter-spacing: -0.03em;
+                  position: absolute;
+                  opacity: 0;
+                  text-align: center;
+                  width: 100%;
+                  transform: scale(0.95) translateY(10px);
+                  animation: ctaAdvSequence 15s infinite ease-in-out;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 1rem;
+                  flex-wrap: wrap;
+                  padding: 0 2rem;
+                }
+                .alimun-cta-highlight {
+                  background-color: #ceff65;
+                  color: #080808;
+                  padding: 0.1em 0.5em;
+                  border-radius: 5rem;
+                  display: inline-block;
+                  box-shadow: 0 4px 15px rgba(206, 255, 101, 0.3);
+                }
+                
+                /* Timings for the four phrases */
+                .cta-phrase-1 { animation-delay: 0s; }
+                .cta-phrase-2 { animation-delay: 3s; }
+                .cta-phrase-3 { animation-delay: 6s; }
+                .cta-phrase-4 { animation-delay: 9s; }
+
+                @keyframes ctaAdvSequence {
+                  0% {
+                    opacity: 0;
+                    transform: scale(0.95) translateY(10px);
+                  }
+                  1.5%, 17% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                  }
+                  18.5%, 100% {
+                    opacity: 0;
+                    transform: scale(1.02) translateY(-10px);
+                  }
+                }
+
+                /* Dark Logo screen animation for bottom CTA */
+                .alimun-cta-logo-anim {
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  opacity: 0;
+                  transform: scale(0.8);
+                  animation: ctaLogoSequence 15s infinite ease-in-out;
+                  pointer-events: none;
+                }
+                
+                .alimun-cta-logo-anim img {
+                  width: 45vw;
+                  max-width: 450px;
+                  height: auto;
+                }
+
+                @keyframes ctaLogoSequence {
+                  0%, 78% {
+                    opacity: 0;
+                    transform: scale(0.8);
+                  }
+                  82%, 96% {
+                    opacity: 1;
+                    transform: scale(1);
+                  }
+                  98%, 100% {
+                    opacity: 0;
+                    transform: scale(1.05);
+                  }
+                }
+
+                /* Subtle background grid effect for CTA */
+                .alimun-cta-grid-bg {
+                  position: absolute;
+                  inset: 0;
+                  background-image: 
+                    radial-gradient(circle at 1px 1px, rgba(206, 255, 101, 0.3) 1.5px, transparent 0);
+                  background-size: 30px 30px;
+                  opacity: 0.5;
+                  animation: ctaGridFloat 30s infinite linear;
+                }
+                
+                @keyframes ctaGridFloat {
+                  from { background-position: 0 0; }
+                  to { background-position: 30px 30px; }
+                }
+
+                @media (max-width: 768px) {
+                  .alimun-cta-adv-text {
+                    font-size: 8vw;
+                    gap: 0.5rem;
+                  }
+                  .alimun-cta-logo-anim img {
+                    width: 70vw;
+                  }
+                }
+              </style>
+
+              <div class="alimun-cta-adv-container">
+                <div class="alimun-cta-grid-bg"></div>
+                
+                <!-- Word-on-screen publicity phrases -->
+                <div class="alimun-cta-adv-text cta-phrase-1" data-i18n-html="cta_phrase_1">Want to <span class="alimun-cta-highlight">move abroad?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-2" data-i18n-html="cta_phrase_2">Want to <span class="alimun-cta-highlight">land that job?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-3" data-i18n-html="cta_phrase_3">Want to <span class="alimun-cta-highlight">pass that exam?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-4" data-i18n-html="cta_phrase_4">Join <span class="alimun-cta-highlight">Alimun.</span></div>
+                
+                <!-- Final Logo Animation -->
+                <div class="alimun-cta-logo-anim">
+                  <img src="images/alimun-logo.svg" alt="Alimun Logo">
+                </div>
+              </div>
+            </div>
+            <div class="max-width-full">
+              <a href="signup.html" class="button is-secondary w-inline-block">
+                <p data-i18n="cta_btn_join_alimun">Join alimun</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
+              </a>
+            </div>
           </div>
         </div>
-        <script>
-          // The card grows to full size as it scrolls into view.
-          (function () {
-            var root = document.currentScript.closest(".teach");
-            var card = root.querySelector(".teach_card");
-            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-            function update() {
-              var r = root.getBoundingClientRect(), vh = window.innerHeight;
-              var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.7)));
-              card.style.setProperty("--teach-p", p.toFixed(3));
-            }
-            window.addEventListener("scroll", update, { passive: true });
-            window.addEventListener("resize", update);
-            update();
-          })();
-        </script>
       </section>
 
   </main>
