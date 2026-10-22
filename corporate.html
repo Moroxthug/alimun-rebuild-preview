@@ -287,107 +287,307 @@ html[dir="rtl"] .kinetic-slide {
           <section class="section wf">
         <style>
           .wf { padding: 6rem 0; }
-          .wf_wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 4rem; align-items: center; }
-          .wf_head h2 { margin: 0 0 2rem; }
-          .wf_rotator { position: relative; height: 5.2em; font-family: Satoshi, sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(1.4rem, 2.3vw, 2.1rem); line-height: 1.3; }
-          .wf_phrase { position: absolute; inset: 0 auto auto 0; opacity: 0; transform: translateY(.6em); transition: opacity .6s ease, transform .6s cubic-bezier(.215, .61, .355, 1); }
+          .wf_head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; }
+          .wf_head h2 { margin: 0; }
+          .wf_head p { margin: 0; max-width: 26rem; color: rgba(8, 8, 8, .7); }
+          .wf_bento { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: minmax(9.5rem, auto); gap: 1.25rem; }
+          .wf_tile { border-radius: 2.25rem; padding: 1.75rem; background-color: var(--white); opacity: 0; transform: translateY(3rem) scale(.95); transition: opacity .9s ease, transform 1s cubic-bezier(.215, .61, .355, 1); }
+          .wf_bento.is-in .wf_tile { opacity: 1; transform: none; }
+          .wf_bento.is-in .wf_tile:nth-child(2) { transition-delay: .15s; }
+          .wf_bento.is-in .wf_tile:nth-child(3) { transition-delay: .3s; }
+          .wf_bento.is-in .wf_tile:nth-child(4) { transition-delay: .45s; }
+          .wf_bento.is-in .wf_tile:nth-child(5) { transition-delay: .6s; }
+          .wf_bento.is-in .wf_tile:nth-child(6) { transition-delay: .75s; }
+          .wf_bento.is-in .wf_tile.is-hovered, .wf_bento.is-in .wf_tile.is-done { transition-delay: 0s; }
+          @media (hover: hover) { .wf_bento.is-in .wf_tile.is-done:not(.wf_photo):hover { transform: translateY(-.4rem); } }
+          .wf_photo { grid-column: 1 / 6; grid-row: 1 / 4; padding: 0; overflow: hidden; position: relative; clip-path: inset(100% 0 0 0 round 2.25rem); transition: clip-path 1.2s cubic-bezier(.215, .61, .355, 1), opacity .3s ease; transform: none; opacity: 1; }
+          .wf_bento.is-in .wf_photo { clip-path: inset(0 0 0 0 round 2.25rem); }
+          .wf_photo img { position: absolute; left: 0; top: 0; width: 100%; height: 120%; object-fit: cover; transform: translateY(var(--wf-y, -8%)); }
+          .wf_lime { grid-column: 6 / 13; grid-row: 1; background-color: var(--green); display: flex; align-items: center; }
+          .wf_rotator { position: relative; width: 100%; height: 2.7em; font-family: Satoshi, sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(1.3rem, 2.1vw, 1.9rem); line-height: 1.3; overflow: hidden; }
+          .wf_phrase { position: absolute; inset: 0 auto auto 0; opacity: 0; transform: translateY(100%); transition: opacity .5s ease, transform .6s cubic-bezier(.215, .61, .355, 1); }
           .wf_phrase.is-on { opacity: 1; transform: none; }
-          .wf_phrase .alimun-cta-highlight { display: inline; background-color: var(--green); border-radius: 5rem; padding: .05em .45em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-          .wf_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-          .wf_card { background-color: var(--white); border-radius: 2.25rem; padding: 2rem; opacity: 0; transform: translateY(1.5rem); transition: opacity .7s ease, transform .7s cubic-bezier(.215, .61, .355, 1); }
-          .wf_card.is-in { opacity: 1; transform: none; }
-          .wf_card.is-in:hover { transform: translateY(-.35rem); }
-          .wf_card:nth-child(2) { transition-delay: .1s; } .wf_card:nth-child(3) { transition-delay: .2s; } .wf_card:nth-child(4) { transition-delay: .3s; }
-          .wf_card.is-in:hover { transition-delay: 0s; }
-          .wf_card h3 { margin: 0 0 .75rem; }
-          .wf_card p { margin: 0; color: rgba(8, 8, 8, .7); }
-          .wf_card.is-ink { background-color: var(--black); color: var(--white); }
-          .wf_card.is-ink h3 { color: var(--green); }
-          .wf_card.is-ink p { color: rgba(255, 255, 255, .75); }
-          @media (max-width: 991px) { .wf_wrap { grid-template-columns: 1fr; gap: 2.5rem; } }
-          @media (max-width: 767px) { .wf { padding: 4.5rem 0; } .wf_grid { grid-template-columns: 1fr; } .wf_card { padding: 1.75rem; } .wf_rotator { height: 4em; } }
-          @media (prefers-reduced-motion: reduce) { .wf_phrase, .wf_card { transition: none; transform: none; } .wf_card { opacity: 1; } }
+          .wf_phrase.is-off { opacity: 0; transform: translateY(-100%); }
+          .wf_f1 { grid-column: 6 / 9; grid-row: 2; } .wf_f2 { grid-column: 9 / 13; grid-row: 2; }
+          .wf_f3 { grid-column: 6 / 10; grid-row: 3; } .wf_f4 { grid-column: 10 / 13; grid-row: 3; }
+          .wf_tile h3 { margin: 0 0 .6rem; }
+          .wf_tile p { margin: 0; color: rgba(8, 8, 8, .7); }
+          .wf_ink { background-color: var(--black); color: var(--white); }
+          .wf_ink h3 { color: var(--green); }
+          .wf_ink p { color: rgba(255, 255, 255, .75); }
+          @media (max-width: 991px) {
+            .wf_head { flex-direction: column; align-items: flex-start; }
+            .wf_bento { grid-template-columns: 1fr 1fr; }
+            .wf_photo { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16 / 10; }
+            .wf_lime { grid-column: 1 / 3; grid-row: auto; }
+            .wf_f1, .wf_f2, .wf_f3, .wf_f4 { grid-column: auto; grid-row: auto; }
+          }
+          @media (max-width: 767px) { .wf { padding: 4.5rem 0; } .wf_bento { grid-template-columns: 1fr; } .wf_photo, .wf_lime { grid-column: auto; } .wf_rotator { height: 3.9em; } }
+          @media (prefers-reduced-motion: reduce) { .wf_tile, .wf_phrase { transition: none; transform: none; opacity: 1; } .wf_photo { clip-path: none; } .wf_photo img { transform: none; height: 100%; } .wf_phrase:not(.is-on) { opacity: 0; } }
         </style>
         <div class="container-large">
-          <div class="wf_wrap">
-            <div class="wf_head">
-              <h2 class="heading-style-h2" data-i18n="corporate_why_title">Workforce fluency</h2>
+          <div class="wf_head">
+            <h2 class="heading-style-h2" data-i18n="corporate_why_title">Workforce fluency</h2>
+          </div>
+          <div class="wf_bento">
+            <div class="wf_tile wf_photo shadow-card"><img src="images/corporate_hero.jpg" loading="lazy" alt="A team working together at laptops"></div>
+            <div class="wf_tile wf_lime">
               <div class="wf_rotator" aria-live="polite">
-                <div class="wf_phrase is-on" data-i18n-html="corp_slide_1">Relocating your <span class="alimun-cta-highlight">team abroad</span>?</div>
-                <div class="wf_phrase" data-i18n-html="corp_slide_2">Certificate preparation for <span class="alimun-cta-highlight">visas and work permits</span>.</div>
-                <div class="wf_phrase" data-i18n-html="corp_slide_3">Live classes with <span class="alimun-cta-highlight">experienced teachers</span>.</div>
-                <div class="wf_phrase" data-i18n-html="corp_slide_4">Lessons focused on <span class="alimun-cta-highlight">your workplace</span>.</div>
-                <div class="wf_phrase" data-i18n-html="corp_slide_5">AI feedback <span class="alimun-cta-highlight">between classes</span>.</div>
-                <div class="wf_phrase" data-i18n-html="corp_slide_6">A dedicated <span class="alimun-cta-highlight">company dashboard</span>.</div>
+                <div class="wf_phrase is-on" data-i18n="corp_phrase_1">Relocating your team abroad?</div>
+                <div class="wf_phrase" data-i18n="corp_phrase_2">Certificates for visas and work permits.</div>
+                <div class="wf_phrase" data-i18n="corp_phrase_3">Live classes with experienced teachers.</div>
+                <div class="wf_phrase" data-i18n="corp_phrase_4">Lessons focused on your workplace.</div>
+                <div class="wf_phrase" data-i18n="corp_phrase_5">AI feedback between classes.</div>
+                <div class="wf_phrase" data-i18n="corp_phrase_6">A dedicated company dashboard.</div>
               </div>
             </div>
-            <div class="wf_grid">
-              <div class="wf_card shadow-card">
-                <h3 class="heading-style-h4" data-i18n="corp_why_1_title">Experienced teachers</h3>
-                <p class="text-size-regular" data-i18n="corp_why_1_desc">Live classes led by experienced teachers, in a private group for your company or one to one for managers.</p>
-              </div>
-              <div class="wf_card shadow-card">
-                <h3 class="heading-style-h4" data-i18n="corp_why_2_title">Workplace-focused lessons</h3>
-                <p class="text-size-regular" data-i18n="corp_why_2_desc">Lessons, notes and homework built around your field and the situations your team meets at work.</p>
-              </div>
-              <div class="wf_card shadow-card">
-                <h3 class="heading-style-h4" data-i18n="corp_why_3_title">Relocation and certificates</h3>
-                <p class="text-size-regular" data-i18n="corp_why_3_desc">Employees can start before they move. They practise in the format of IELTS, B2 First and C1 Advanced for English, and Goethe B1, Goethe B2 and telc B1 for German, the certificates many visas and work permits ask for. Not official exam material.</p>
-              </div>
-              <div class="wf_card shadow-card is-ink">
-                <h3 class="heading-style-h4" data-i18n="corp_why_4_title">Company dashboard</h3>
-                <p class="text-size-regular" data-i18n="corp_why_4_desc">Follow attendance, levels and progress for every employee in one place.</p>
-              </div>
+            <div class="wf_tile wf_f1 shadow-card">
+              <h3 class="heading-style-h4" data-i18n="corp_why_1_title">Experienced teachers</h3>
+              <p class="text-size-small" data-i18n="corp_why_1_desc">Live classes led by experienced teachers, in a private group for your company or one to one for managers.</p>
+            </div>
+            <div class="wf_tile wf_f2 shadow-card">
+              <h3 class="heading-style-h4" data-i18n="corp_why_2_title">Workplace-focused lessons</h3>
+              <p class="text-size-small" data-i18n="corp_why_2_desc">Lessons, notes and homework built around your field and the situations your team meets at work.</p>
+            </div>
+            <div class="wf_tile wf_f3 shadow-card">
+              <h3 class="heading-style-h4" data-i18n="corp_why_3_title">Relocation and certificates</h3>
+              <p class="text-size-small" data-i18n="corp_why_3_desc">Employees can start before they move. They practise in the format of IELTS, B2 First and C1 Advanced for English, and Goethe B1, Goethe B2 and telc B1 for German, the certificates many visas and work permits ask for. Not official exam material.</p>
+            </div>
+            <div class="wf_tile wf_f4 wf_ink shadow-card">
+              <h3 class="heading-style-h4" data-i18n="corp_why_4_title">Company dashboard</h3>
+              <p class="text-size-small" data-i18n="corp_why_4_desc">Follow attendance, levels and progress for every employee in one place.</p>
             </div>
           </div>
         </div>
         <script>
           (function () {
             var root = document.currentScript.closest(".wf");
+            var bento = root.querySelector(".wf_bento");
             var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            // One phrase at a time, every few seconds.
+            // The phrase in the lime tile slides up and is replaced every few seconds.
             var phrases = root.querySelectorAll(".wf_phrase"), i = 0;
             setInterval(function () {
-              phrases[i].classList.remove("is-on");
+              var cur = phrases[i];
+              cur.classList.remove("is-on"); cur.classList.add("is-off");
+              setTimeout(function () { cur.classList.remove("is-off"); }, 650);
               i = (i + 1) % phrases.length;
               phrases[i].classList.add("is-on");
-            }, 3200);
-            // Cards fade up once, one after another, when they come into view.
-            var cards = root.querySelectorAll(".wf_card");
-            if (reduce || !("IntersectionObserver" in window)) { cards.forEach(function (c) { c.classList.add("is-in"); }); return; }
-            var io = new IntersectionObserver(function (entries) {
-              entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
-            }, { threshold: 0.15 });
-            cards.forEach(function (c) { io.observe(c); });
+            }, 3000);
+            if (reduce || !("IntersectionObserver" in window)) { bento.classList.add("is-in"); return; }
+            // The tiles come in one after another once the grid is well in view; after that, hover reacts at once.
+            var io = new IntersectionObserver(function (e) {
+              if (!e[0].isIntersecting) return;
+              bento.classList.add("is-in"); io.disconnect();
+              setTimeout(function () { root.querySelectorAll(".wf_tile").forEach(function (t) { t.classList.add("is-done"); }); }, 1900);
+            }, { threshold: 0.35 });
+            io.observe(bento);
+            // The photo drifts slightly inside its tile while the page scrolls.
+            var img = root.querySelector(".wf_photo img");
+            function drift() {
+              var r = img.parentNode.getBoundingClientRect(), vh = window.innerHeight;
+              var p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+              img.style.setProperty("--wf-y", (-16 + p * 16).toFixed(2) + "%");
+            }
+            window.addEventListener("scroll", drift, { passive: true });
+            window.addEventListener("resize", drift);
+            drift();
           })();
         </script>
       </section>
 
-          <section class="section price-cta">
+          <section class="section corp-cta">
         <style>
-          .price-cta { padding: 7.5rem 0 5rem; }
-          .price-cta_card { background-color: var(--black); color: var(--white); border-radius: 3.125rem; padding: 5.5rem 3rem; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; transform: translateY(2rem) scale(.97); transition: opacity .8s ease, transform .9s cubic-bezier(.215, .61, .355, 1); }
-          .price-cta_card.is-in { opacity: 1; transform: none; }
-          .price-cta_card p { margin: 0; max-width: 46rem; }
-          .price-cta .button { margin-top: 2.25rem; width: fit-content; }
-          @media (max-width: 767px) { .price-cta { padding: 5rem 0 3rem; } .price-cta_card { padding: 3.5rem 1.5rem; border-radius: 2.25rem; } }
-          @media (prefers-reduced-motion: reduce) { .price-cta_card { opacity: 1; transform: none; transition: none; } }
+          .corp-cta { padding: 2rem 0 0; }
+          .corp-cta_card { background-color: var(--green); color: var(--black); border-radius: 3.125rem; padding: 5rem 4rem; display: grid; grid-template-columns: 7fr 5fr; gap: 3rem; align-items: end; overflow: hidden; transform: scale(var(--cta-s, .9)); transform-origin: center bottom; }
+          .corp-cta_title { margin: 0; font-family: Coolvetica Condensed, sans-serif; text-transform: uppercase; font-weight: 400; line-height: .95; font-size: clamp(3rem, 7vw, 6.5rem); }
+          .corp-cta_title span { display: block; transform: translateX(calc(var(--cta-p, 1) * -6% + 6%)); }
+          .corp-cta_title span + span { transform: translateX(calc(var(--cta-p, 1) * 6% - 6%)); }
+          .corp-cta_side p { margin: 0; }
+          .corp-cta .button { margin-top: 1.75rem; width: fit-content; }
+          .corp-cta .button.is-secondary { border-color: var(--black); }
+          @media (max-width: 767px) { .corp-cta_card { grid-template-columns: 1fr; padding: 3rem 1.75rem; border-radius: 2.25rem; gap: 1.5rem; } }
+          @media (prefers-reduced-motion: reduce) { .corp-cta_card { transform: none; } .corp-cta_title span, .corp-cta_title span + span { transform: none; } }
         </style>
         <div class="container-large">
-          <div class="price-cta_card">
-            <p class="heading-style-h3" data-i18n="corp_price_desc">Pricing depends on the size of your team and what you need. Get in touch and we will put together a quote.</p>
-            <a href="contact.html" class="button w-inline-block"><p data-i18n="corp_contact_btn">Contact us</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16"></a>
+          <div class="corp-cta_card">
+            <h2 class="corp-cta_title"><span data-i18n="corp_cta_title_1">Let's talk</span><span data-i18n="corp_cta_title_2">about your team</span></h2>
+            <div class="corp-cta_side">
+              <p class="text-size-large" data-i18n="corp_price_desc">Pricing depends on the size of your team and what you need. Get in touch and we will put together a quote.</p>
+              <a href="contact.html" class="button is-secondary w-inline-block"><p data-i18n="corp_contact_btn">Contact us</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16"></a>
+            </div>
           </div>
         </div>
         <script>
-          // The banner fades up once when it comes into view.
+          // The card grows into place and the two heading lines slide together as the section scrolls in.
           (function () {
-            var card = document.currentScript.closest(".price-cta").querySelector(".price-cta_card");
-            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) { card.classList.add("is-in"); return; }
-            var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { card.classList.add("is-in"); io.disconnect(); } }, { threshold: 0.2 });
-            io.observe(card);
+            var root = document.currentScript.closest(".corp-cta"), card = root.querySelector(".corp-cta_card");
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+            function update() {
+              var r = root.getBoundingClientRect(), vh = window.innerHeight;
+              var p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.75)));
+              card.style.setProperty("--cta-s", (0.9 + p * 0.1).toFixed(3));
+              card.style.setProperty("--cta-p", p.toFixed(3));
+            }
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+            update();
           })();
         </script>
+      </section>
+
+          <section data-w-id="4500f34f-ad71-c737-340f-a39b6520a855" class="section is-bottom-cta">
+        <div class="container-large">
+          <div data-w-id="4500f34f-ad71-c737-340f-a39b6520a857" class="bottom-cta_wrap">
+            <div class="max-width-700">
+              <h2 class="heading-style-h1"><span class="is-word is-1" data-i18n="cta_ready_to_learn">Ready to learn?</span></h2>
+            </div>
+            <div class="bottom-cta_box" style="background-color: #ffffff; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 10px 40px rgba(0,0,0,0.02);">
+              <!-- Typography sequence animation with white background -->
+              <style>
+                .alimun-cta-adv-container {
+                  position: absolute;
+                  inset: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  font-family: 'Satoshi', 'Inter', sans-serif;
+                  overflow: hidden;
+                }
+                .alimun-cta-adv-text {
+                  font-size: 5vw;
+                  font-weight: 800;
+                  color: #080808;
+                  text-transform: uppercase;
+                  letter-spacing: -0.03em;
+                  position: absolute;
+                  opacity: 0;
+                  text-align: center;
+                  width: 100%;
+                  transform: scale(0.95) translateY(10px);
+                  animation: ctaAdvSequence 15s infinite ease-in-out;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 1rem;
+                  flex-wrap: wrap;
+                  padding: 0 2rem;
+                }
+                .alimun-cta-highlight {
+                  background-color: #ceff65;
+                  color: #080808;
+                  padding: 0.1em 0.5em;
+                  border-radius: 5rem;
+                  display: inline-block;
+                  box-shadow: 0 4px 15px rgba(206, 255, 101, 0.3);
+                }
+                
+                /* Timings for the four phrases */
+                .cta-phrase-1 { animation-delay: 0s; }
+                .cta-phrase-2 { animation-delay: 3s; }
+                .cta-phrase-3 { animation-delay: 6s; }
+                .cta-phrase-4 { animation-delay: 9s; }
+
+                @keyframes ctaAdvSequence {
+                  0% {
+                    opacity: 0;
+                    transform: scale(0.95) translateY(10px);
+                  }
+                  1.5%, 17% {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                  }
+                  18.5%, 100% {
+                    opacity: 0;
+                    transform: scale(1.02) translateY(-10px);
+                  }
+                }
+
+                /* Dark Logo screen animation for bottom CTA */
+                .alimun-cta-logo-anim {
+                  position: absolute;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  background-color: #ffffff;
+                  opacity: 0;
+                  transform: scale(0.8);
+                  animation: ctaLogoSequence 15s infinite ease-in-out;
+                  pointer-events: none;
+                }
+                
+                .alimun-cta-logo-anim img {
+                  width: 45vw;
+                  max-width: 450px;
+                  height: auto;
+                }
+
+                @keyframes ctaLogoSequence {
+                  0%, 78% {
+                    opacity: 0;
+                    transform: scale(0.8);
+                  }
+                  82%, 96% {
+                    opacity: 1;
+                    transform: scale(1);
+                  }
+                  98%, 100% {
+                    opacity: 0;
+                    transform: scale(1.05);
+                  }
+                }
+
+                /* Subtle background grid effect for CTA */
+                .alimun-cta-grid-bg {
+                  position: absolute;
+                  inset: 0;
+                  background-image: 
+                    radial-gradient(circle at 1px 1px, rgba(206, 255, 101, 0.3) 1.5px, transparent 0);
+                  background-size: 30px 30px;
+                  opacity: 0.5;
+                  animation: ctaGridFloat 30s infinite linear;
+                }
+                
+                @keyframes ctaGridFloat {
+                  from { background-position: 0 0; }
+                  to { background-position: 30px 30px; }
+                }
+
+                @media (max-width: 768px) {
+                  .alimun-cta-adv-text {
+                    font-size: 8vw;
+                    gap: 0.5rem;
+                  }
+                  .alimun-cta-logo-anim img {
+                    width: 70vw;
+                  }
+                }
+              </style>
+
+              <div class="alimun-cta-adv-container">
+                <div class="alimun-cta-grid-bg"></div>
+                
+                <!-- Word-on-screen publicity phrases -->
+                <div class="alimun-cta-adv-text cta-phrase-1" data-i18n-html="cta_phrase_1">Want to <span class="alimun-cta-highlight">move abroad?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-2" data-i18n-html="cta_phrase_2">Want to <span class="alimun-cta-highlight">land that job?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-3" data-i18n-html="cta_phrase_3">Want to <span class="alimun-cta-highlight">pass that exam?</span></div>
+                <div class="alimun-cta-adv-text cta-phrase-4" data-i18n-html="cta_phrase_4">Join <span class="alimun-cta-highlight">Alimun.</span></div>
+                
+                <!-- Final Logo Animation -->
+                <div class="alimun-cta-logo-anim">
+                  <img src="images/alimun-logo.svg" alt="Alimun Logo">
+                </div>
+              </div>
+            </div>
+            <div class="max-width-full">
+              <a href="signup.html" class="button is-secondary w-inline-block">
+                <p data-i18n="cta_btn_join_alimun">Join alimun</p><img src="images/icon-arrow-light.svg" loading="lazy" alt="" class="icon-16">
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
   </main>
