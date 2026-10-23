@@ -316,6 +316,52 @@ body {
       </section>
 
     
+          <section class="section gd">
+        <style>
+          /* Guide: pure text in an editorial layout. Each block fades and rises as it reaches the middle of the screen. */
+          .gd { padding: 7rem 0; }
+          .gd_head { max-width: 58rem; margin-bottom: 4.5rem; }
+          .gd_head h2 { margin: 0 0 1.75rem; }
+          .gd_lead { margin: 0; font-size: clamp(1.35rem, 2.2vw, 1.9rem); line-height: 1.4; }
+          .gd_row { display: grid; grid-template-columns: 4fr 7fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid rgba(8, 8, 8, .12); }
+          .gd_row h3 { margin: 0; max-width: 22rem; }
+          .gd_text p { margin: 0; color: rgba(8, 8, 8, .78); }
+          .gd_text p + p { margin-top: 1.25rem; }
+          .gd .gd_lead, .gd_row { opacity: calc(.12 + var(--gd, 0) * .88); transform: translateY(calc((1 - var(--gd, 0)) * 2.5rem)); }
+          @media (max-width: 767px) {
+            .gd { padding: 5rem 0; }
+            .gd_head { margin-bottom: 2.5rem; }
+            .gd_row { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+          }
+        </style>
+        <div class="container-large">
+          <div class="gd_head">
+            <h2 class="heading-style-h2">Studiare lo spagnolo online: cosa sapere prima di iniziare</h2>
+            <p class="gd_lead">Lo spagnolo è la lingua più vicina all'italiano tra quelle più studiate: si capisce presto, ma parlarlo bene richiede di uscire dalle somiglianze.</p>
+          </div>
+          <div class="gd_row"><h3 class="heading-style-h4">Perché lo spagnolo conta per chi vive in Italia</h3><div class="gd_text"><p class="text-size-large">Lo spagnolo è lingua ufficiale in Spagna e in gran parte dell'America Latina ed è una delle lingue più parlate al mondo. È utile per viaggiare, per l'Erasmus e per lavorare con aziende spagnole e latinoamericane.</p><p class="text-size-large">Per chi si trasferisce in Spagna, conoscere bene la lingua rende più semplici la ricerca di lavoro e di casa e i rapporti con gli uffici.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Il rischio dell'itañol</h3><div class="gd_text"><p class="text-size-large">La vicinanza con l'italiano permette di farsi capire presto, ma porta anche a mescolare le due lingue: parole simili con significati diversi, preposizioni e verbi usati all'italiana.</p><p class="text-size-large">Lezioni dal vivo con correzione puntuale e tanta pratica di conversazione aiutano a passare dal farsi capire al parlare uno spagnolo corretto e naturale.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Come capire da che livello partire</h3><div class="gd_text"><p class="text-size-large">Il Quadro comune europeo di riferimento divide la conoscenza di una lingua in sei livelli, dalla A1 alla C2. Misurarti prima di iniziare evita di ripetere ciò che sai già o di saltare basi importanti.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Quando aprono le classi</h3><div class="gd_text"><p class="text-size-large">Le classi di spagnolo su Alimun non sono ancora aperte. Iscrivendoti gratis alla lista d'attesa ricevi un'email appena si aprono, senza pagare nulla oggi. Nel frattempo puoi già seguire le lezioni di inglese e tedesco.</p></div></div>
+        </div>
+        <script>
+          (function () {
+            var blocks = [].slice.call(document.currentScript.closest(".gd").querySelectorAll(".gd_lead, .gd_row"));
+            function update() {
+              var vh = window.innerHeight;
+              blocks.forEach(function (b) {
+                var top = b.getBoundingClientRect().top;
+                var p = Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.4)));
+                b.style.setProperty("--gd", p.toFixed(3));
+              });
+            }
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+            update();
+          })();
+        </script>
+      </section>
+
   </main>
       <footer class="section is-footer">
       <div class="container-large">

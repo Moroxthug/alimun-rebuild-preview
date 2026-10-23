@@ -316,6 +316,52 @@ body {
       </section>
 
     
+          <section class="section gd">
+        <style>
+          /* Guide: pure text in an editorial layout. Each block fades and rises as it reaches the middle of the screen. */
+          .gd { padding: 7rem 0; }
+          .gd_head { max-width: 58rem; margin-bottom: 4.5rem; }
+          .gd_head h2 { margin: 0 0 1.75rem; }
+          .gd_lead { margin: 0; font-size: clamp(1.35rem, 2.2vw, 1.9rem); line-height: 1.4; }
+          .gd_row { display: grid; grid-template-columns: 4fr 7fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid rgba(8, 8, 8, .12); }
+          .gd_row h3 { margin: 0; max-width: 22rem; }
+          .gd_text p { margin: 0; color: rgba(8, 8, 8, .78); }
+          .gd_text p + p { margin-top: 1.25rem; }
+          .gd .gd_lead, .gd_row { opacity: calc(.12 + var(--gd, 0) * .88); transform: translateY(calc((1 - var(--gd, 0)) * 2.5rem)); }
+          @media (max-width: 767px) {
+            .gd { padding: 5rem 0; }
+            .gd_head { margin-bottom: 2.5rem; }
+            .gd_row { grid-template-columns: 1fr; gap: 1rem; padding: 2rem 0; }
+          }
+        </style>
+        <div class="container-large">
+          <div class="gd_head">
+            <h2 class="heading-style-h2">Studiare il francese online: cosa sapere prima di iniziare</h2>
+            <p class="gd_lead">Il francese è vicino all'italiano e per questo i primi passi sono rapidi. Proprio questa somiglianza però nasconde trappole che conviene conoscere fin dall'inizio.</p>
+          </div>
+          <div class="gd_row"><h3 class="heading-style-h4">Perché il francese conta per chi vive in Italia</h3><div class="gd_text"><p class="text-size-large">Il francese si parla in Francia, Belgio, Svizzera, Lussemburgo, in Canada e in molti paesi africani, ed è una lingua di lavoro delle istituzioni europee e di molte organizzazioni internazionali.</p><p class="text-size-large">È utile in settori come il turismo, la moda, l'agroalimentare e il commercio con la Francia, uno dei principali partner economici dell'Italia, e per chi studia o lavora nelle zone di confine.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Somiglianze e trappole per un italiano</h3><div class="gd_text"><p class="text-size-large">Molte parole si riconoscono subito, ma i falsi amici sono numerosi e la pronuncia, con le sue vocali nasali e le lettere che non si leggono, richiede pratica d'ascolto fin dal primo giorno.</p><p class="text-size-large">Parlare con un insegnante e con un gruppo aiuta a sentire subito la lingua vera e a correggere gli errori che nascono dall'italiano prima che diventino abitudini.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Come capire da che livello partire</h3><div class="gd_text"><p class="text-size-large">Il Quadro comune europeo di riferimento divide la conoscenza di una lingua in sei livelli, dalla A1 alla C2. Anche se il francese ti sembra familiare, misurarti prima di iniziare ti permette di partire dal punto giusto.</p></div></div>
+          <div class="gd_row"><h3 class="heading-style-h4">Quando aprono le classi</h3><div class="gd_text"><p class="text-size-large">Le classi di francese su Alimun non sono ancora aperte. Iscrivendoti gratis alla lista d'attesa ricevi un'email appena si aprono, senza pagare nulla oggi. Nel frattempo puoi già seguire le lezioni di inglese e tedesco.</p></div></div>
+        </div>
+        <script>
+          (function () {
+            var blocks = [].slice.call(document.currentScript.closest(".gd").querySelectorAll(".gd_lead, .gd_row"));
+            function update() {
+              var vh = window.innerHeight;
+              blocks.forEach(function (b) {
+                var top = b.getBoundingClientRect().top;
+                var p = Math.min(1, Math.max(0, (vh * 0.95 - top) / (vh * 0.4)));
+                b.style.setProperty("--gd", p.toFixed(3));
+              });
+            }
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+            update();
+          })();
+        </script>
+      </section>
+
   </main>
       <footer class="section is-footer">
       <div class="container-large">
