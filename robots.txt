@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Prefix rules: each covers the clean URL (/signin) and the .html file.
+Disallow: /admin
+Disallow: /signin
+Disallow: /signup
+Disallow: /signup-success
+Disallow: /student-dashboard
+Disallow: /teacher-dashboard
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /careers-teachers-section
+Disallow: /*/admin
+Disallow: /*/signin
+Disallow: /*/signup
+Disallow: /*/signup-success
+Disallow: /*/student-dashboard
+Disallow: /*/teacher-dashboard
+Disallow: /*/forgot-password
+Disallow: /*/reset-password
+Disallow: /*/careers-teachers-section
+
+Sitemap: https://alimun.com/sitemap.xml
