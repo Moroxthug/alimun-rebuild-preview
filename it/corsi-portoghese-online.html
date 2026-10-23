@@ -31,6 +31,7 @@ body {
   <meta property="og:image" content="https://alimun.com/images/alimun-og.jpg">
   <meta property="og:locale" content="it_IT">
   <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando aprono le classi di portoghese?","acceptedAnswer":{"@type":"Answer","text":"Non c'è ancora una data. Iscrivendoti alla lista d'attesa ricevi un'email appena le classi di portoghese si aprono."}},{"@type":"Question","name":"La lista d'attesa è gratuita?","acceptedAnswer":{"@type":"Answer","text":"Sì. Ti iscrivi gratis e oggi non paghi nulla."}},{"@type":"Question","name":"Posso iniziare subito con un'altra lingua?","acceptedAnswer":{"@type":"Answer","text":"Sì, le classi di inglese e tedesco sono già aperte e puoi iscriverti in qualsiasi momento."}},{"@type":"Question","name":"Come si svolgono le lezioni su Alimun?","acceptedAnswer":{"@type":"Answer","text":"Le lezioni sono dal vivo in video, con un insegnante e sempre lo stesso gruppo, in giorni fissi e alla stessa ora ogni settimana. Tra una lezione e l'altra ti eserciti con correzione immediata."}},{"@type":"Question","name":"Che cosa mi serve per seguire le lezioni?","acceptedAnswer":{"@type":"Answer","text":"Un computer o un altro dispositivo con videocamera, microfono e una connessione stabile. Le lezioni si svolgono nel browser, senza installare programmi."}}]}</script>
 
   <link rel="alternate" hreflang="it" href="https://alimun.com/it/corsi-portoghese-online">
 </head><body>
@@ -365,6 +366,74 @@ body {
       </section>
 
     
+          <section class="section qa">
+        <style>
+          /* FAQ: questions on the left slide in one after another; the answer to the selected question slides into a large card on the right. Stacked on phones. */
+          .qa { padding: 6rem 0 7rem; }
+          .qa_head { margin-bottom: 3rem; }
+          .qa_head h2 { margin: 0; }
+          .qa_wrap { display: grid; grid-template-columns: 5fr 6fr; gap: 2.5rem; align-items: start; }
+          .qa_list { display: flex; flex-direction: column; }
+          .qa_q { display: block; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid rgba(8, 8, 8, .12); padding: 1.35rem 0; cursor: pointer; color: rgba(8, 8, 8, .45); font-family: Coolvetica Condensed, sans-serif; text-transform: uppercase; font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.05; opacity: 0; transform: translateX(-2rem); transition: color .35s ease, opacity .6s ease, transform .7s cubic-bezier(.215, .61, .355, 1); }
+          .qa_list.is-in .qa_q { opacity: 1; transform: none; }
+          .qa_q.is-on { color: var(--black); }
+          .qa_q .qa_mobile { display: none; }
+          .qa_card { position: sticky; top: 8rem; min-height: 22rem; border-radius: 3.125rem; background-color: var(--green); padding: 3rem; overflow: hidden; }
+          .qa_a { position: absolute; left: 3rem; right: 3rem; top: 3rem; opacity: 0; transform: translateY(1.5rem); transition: opacity .45s ease, transform .55s cubic-bezier(.215, .61, .355, 1); pointer-events: none; }
+          .qa_a.is-on { position: relative; left: auto; right: auto; top: auto; opacity: 1; transform: none; pointer-events: auto; }
+          .qa_a h3 { margin: 0 0 1rem; }
+          .qa_a p { margin: 0; }
+          @media (max-width: 767px) {
+            .qa { padding: 4.5rem 0 5rem; }
+            .qa_wrap { grid-template-columns: 1fr; }
+            .qa_card { display: none; }
+            .qa_q { color: var(--black); }
+            .qa_q .qa_mobile { display: block; margin-top: .75rem; font-family: Satoshi, sans-serif; text-transform: none; font-size: 1rem; line-height: 1.6; color: rgba(8, 8, 8, .75); max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+            .qa_q.is-on .qa_mobile { max-height: 20rem; }
+          }
+        </style>
+        <div class="container-large">
+          <div class="qa_head">
+            <h2 class="heading-style-h2">Domande frequenti</h2>
+          </div>
+          <div class="qa_wrap">
+            <div class="qa_list">
+              <button type="button" class="qa_q" aria-expanded="false">Quando aprono le classi di portoghese?<span class="qa_mobile">Non c'è ancora una data. Iscrivendoti alla lista d'attesa ricevi un'email appena le classi di portoghese si aprono.</span></button>
+              <button type="button" class="qa_q" aria-expanded="false">La lista d'attesa è gratuita?<span class="qa_mobile">Sì. Ti iscrivi gratis e oggi non paghi nulla.</span></button>
+              <button type="button" class="qa_q" aria-expanded="false">Posso iniziare subito con un'altra lingua?<span class="qa_mobile">Sì, le classi di inglese e tedesco sono già aperte e puoi iscriverti in qualsiasi momento.</span></button>
+              <button type="button" class="qa_q" aria-expanded="false">Come si svolgono le lezioni su Alimun?<span class="qa_mobile">Le lezioni sono dal vivo in video, con un insegnante e sempre lo stesso gruppo, in giorni fissi e alla stessa ora ogni settimana. Tra una lezione e l'altra ti eserciti con correzione immediata.</span></button>
+              <button type="button" class="qa_q" aria-expanded="false">Che cosa mi serve per seguire le lezioni?<span class="qa_mobile">Un computer o un altro dispositivo con videocamera, microfono e una connessione stabile. Le lezioni si svolgono nel browser, senza installare programmi.</span></button>
+            </div>
+            <div class="qa_card shadow-card" aria-live="polite">
+              <div class="qa_a"><h3 class="heading-style-h4">Quando aprono le classi di portoghese?</h3><p class="text-size-large">Non c'è ancora una data. Iscrivendoti alla lista d'attesa ricevi un'email appena le classi di portoghese si aprono.</p></div>
+              <div class="qa_a"><h3 class="heading-style-h4">La lista d'attesa è gratuita?</h3><p class="text-size-large">Sì. Ti iscrivi gratis e oggi non paghi nulla.</p></div>
+              <div class="qa_a"><h3 class="heading-style-h4">Posso iniziare subito con un'altra lingua?</h3><p class="text-size-large">Sì, le classi di inglese e tedesco sono già aperte e puoi iscriverti in qualsiasi momento.</p></div>
+              <div class="qa_a"><h3 class="heading-style-h4">Come si svolgono le lezioni su Alimun?</h3><p class="text-size-large">Le lezioni sono dal vivo in video, con un insegnante e sempre lo stesso gruppo, in giorni fissi e alla stessa ora ogni settimana. Tra una lezione e l'altra ti eserciti con correzione immediata.</p></div>
+              <div class="qa_a"><h3 class="heading-style-h4">Che cosa mi serve per seguire le lezioni?</h3><p class="text-size-large">Un computer o un altro dispositivo con videocamera, microfono e una connessione stabile. Le lezioni si svolgono nel browser, senza installare programmi.</p></div>
+            </div>
+          </div>
+        </div>
+        <script>
+          (function () {
+            var root = document.currentScript.closest(".qa"), list = root.querySelector(".qa_list");
+            var qs = [].slice.call(root.querySelectorAll(".qa_q")), as = [].slice.call(root.querySelectorAll(".qa_a"));
+            function show(k) {
+              qs.forEach(function (q, i) { q.classList.toggle("is-on", i === k); q.setAttribute("aria-expanded", i === k ? "true" : "false"); });
+              as.forEach(function (a, i) { a.classList.toggle("is-on", i === k); });
+            }
+            qs.forEach(function (q, i) {
+              q.addEventListener("mouseenter", function () { if (window.matchMedia("(hover: hover)").matches) show(i); });
+              q.addEventListener("click", function () { show(i); });
+              q.style.transitionDelay = "0s, " + (i * 0.08) + "s, " + (i * 0.08) + "s";
+            });
+            show(0);
+            if (!("IntersectionObserver" in window)) { list.classList.add("is-in"); return; }
+            var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) { list.classList.add("is-in"); io.disconnect(); } }, { threshold: 0.2 });
+            io.observe(list);
+          })();
+        </script>
+      </section>
+
   </main>
       <footer class="section is-footer">
       <div class="container-large">
