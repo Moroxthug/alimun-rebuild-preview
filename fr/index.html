@@ -49,6 +49,8 @@ body {
   </script>
   <script src="/js/currency.js"></script>
 
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://alimun.com/fr/cours-d-anglais-en-ligne","item":{"@type":"Course","name":"Cours d'anglais en ligne","description":"Cours d'anglais en ligne en groupe avec un professeur, à jours et heures fixes chaque semaine, devoirs corrigés avec l'aide de l'IA et exercices corrigés immédiatement. À partir de €24 par mois.","url":"https://alimun.com/fr/cours-d-anglais-en-ligne","provider":{"@type":"Organization","name":"Alimun","sameAs":"https://alimun.com"}}},{"@type":"ListItem","position":2,"url":"https://alimun.com/fr/cours-d-allemand-en-ligne","item":{"@type":"Course","name":"Cours d'allemand en ligne","description":"Cours d'allemand en ligne en groupe avec un professeur, à jours et heures fixes chaque semaine, devoirs corrigés avec l'aide de l'IA et exercices corrigés immédiatement. À partir de €24 par mois.","url":"https://alimun.com/fr/cours-d-allemand-en-ligne","provider":{"@type":"Organization","name":"Alimun","sameAs":"https://alimun.com"}}},{"@type":"ListItem","position":3,"url":"https://alimun.com/fr/cours-d-espagnol-en-ligne","item":{"@type":"Course","name":"Cours d'espagnol en ligne","description":"Les cours d'espagnol sur Alimun ouvriront bientôt. Inscris-toi gratuitement sur la liste d'attente et nous t'écrirons dès leur ouverture.","url":"https://alimun.com/fr/cours-d-espagnol-en-ligne","provider":{"@type":"Organization","name":"Alimun","sameAs":"https://alimun.com"}}},{"@type":"ListItem","position":4,"url":"https://alimun.com/fr/cours-de-portugais-en-ligne","item":{"@type":"Course","name":"Cours de portugais en ligne","description":"Les cours de portugais sur Alimun ouvriront bientôt. Inscris-toi gratuitement sur la liste d'attente et nous t'écrirons dès leur ouverture.","url":"https://alimun.com/fr/cours-de-portugais-en-ligne","provider":{"@type":"Organization","name":"Alimun","sameAs":"https://alimun.com"}}},{"@type":"ListItem","position":5,"url":"https://alimun.com/fr/cours-d-italien-en-ligne","item":{"@type":"Course","name":"Cours d'italien en ligne","description":"Les cours d'italien sur Alimun ouvriront bientôt. Inscris-toi gratuitement sur la liste d'attente et nous t'écrirons dès leur ouverture.","url":"https://alimun.com/fr/cours-d-italien-en-ligne","provider":{"@type":"Organization","name":"Alimun","sameAs":"https://alimun.com"}}}]}</script>
+
   <link rel="alternate" hreflang="x-default" href="https://alimun.com/">
   <link rel="alternate" hreflang="en" href="https://alimun.com/">
   <link rel="alternate" hreflang="es" href="https://alimun.com/es/">
@@ -150,18 +152,13 @@ body {
 
           <section class="gs">
         <style>
-          /* Group size: the screen holds while four plan cards glide sideways with the scroll. Above them a row of
-             35 dots, one per person, collapses to the size of the group in view (35, 17, 6, then 1). The first dot,
-             in lime, is you. Each card's photo drifts slightly against the card for depth. */
+          /* Group size: the screen holds while four plan cards glide sideways with the scroll. Each card's photo drifts
+             slightly against the card for depth. */
           .gs { position: relative; height: 420vh; background-color: var(--white); }
           .gs_stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
           .gs_head { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; margin-bottom: 2.5rem; }
           .gs_head h2 { margin: 0; }
-          .gs_intro p { margin: 0 0 1.5rem; max-width: 34rem; color: rgba(8, 8, 8, .7); }
-          .gs_dots { display: flex; align-items: center; height: 1rem; }
-          .gs_dot { flex: none; width: .75rem; height: .75rem; margin-right: .5rem; border-radius: 50%; background-color: var(--black); transition: width .6s cubic-bezier(.215, .61, .355, 1), margin .6s cubic-bezier(.215, .61, .355, 1), transform .6s cubic-bezier(.215, .61, .355, 1), opacity .4s ease; }
-          .gs_dot.is-out { width: 0; margin-right: 0; transform: scale(0); opacity: 0; }
-          .gs_dot.is-you { background-color: var(--green); box-shadow: 0 0 0 1px var(--black) inset; }
+          .gs_intro p { margin: 0; max-width: 34rem; color: rgba(8, 8, 8, .7); }
           .gs_rail { position: relative; }
           .gs_track { display: flex; gap: 2rem; will-change: transform; }
           .gs_panel { flex: none; width: min(68rem, 74vw); display: grid; grid-template-columns: 1.1fr 1fr; border-radius: 3.125rem; background-color: var(--white); overflow: hidden; }
@@ -180,9 +177,7 @@ body {
           @media (max-width: 767px) {
             .gs { height: 380vh; }
             .gs_head { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.25rem; }
-            .gs_intro p { font-size: .95rem; margin-bottom: 1rem; }
-            .gs_dots { height: .6rem; }
-            .gs_dot { width: .45rem; height: .45rem; margin-right: .2rem; }
+            .gs_intro p { font-size: .95rem; }
             .gs_track { gap: 1rem; }
             .gs_panel { width: 84vw; grid-template-columns: 1fr; border-radius: 2.25rem; }
             .gs_img { height: 24vh; }
@@ -201,7 +196,6 @@ body {
               <h2 class="heading-style-h2" data-i18n="home_groups_title">Choisis la taille de ton groupe</h2>
               <div class="gs_intro">
                 <p class="text-size-medium" data-i18n="home_groups_desc">Chaque formule comprend des cours en direct avec un professeur, à jours fixes chaque semaine. Plus le groupe est petit, plus tu as de temps pour parler.</p>
-                <div class="gs_dots" aria-hidden="true"></div>
               </div>
             </div>
           </div>
@@ -253,9 +247,6 @@ body {
           (function () {
             var root = document.currentScript.closest(".gs");
             var track = root.querySelector(".gs_track"), panels = [].slice.call(root.querySelectorAll(".gs_panel"));
-            var dotsBox = root.querySelector(".gs_dots"), dots = [];
-            for (var i = 0; i < 35; i++) { var d = document.createElement("i"); d.className = i ? "gs_dot" : "gs_dot is-you"; dotsBox.appendChild(d); dots.push(d); }
-            var current = -1;
             function update() {
               var range = root.offsetHeight - window.innerHeight;
               var p = Math.min(1, Math.max(0, -root.getBoundingClientRect().top / range));
@@ -269,13 +260,101 @@ body {
                 var off = Math.max(-1, Math.min(1, t * (panels.length - 1) - k));
                 panel.style.setProperty("--gs-shift", (off * 6).toFixed(2) + "%");
               });
-              var k = Math.min(panels.length - 1, Math.round(t * (panels.length - 1)));
+            }
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+            update();
+          })();
+        </script>
+      </section>
+
+          <section class="ln">
+        <style>
+          /* Online language courses: a list of course links beside a video card that stays in view. As each course
+             reaches the middle of the screen its city video wipes in and a lime marker sweeps behind its title.
+             The rows, links and videos are written per site language by scripts/localize.mjs from the course data. */
+          .ln { position: relative; padding: 8rem 0; background-color: var(--white); }
+          .ln_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+          .ln_head h2 { margin: 0; }
+          .ln_head p { margin: 1.25rem 0 0; max-width: 34rem; color: rgba(8, 8, 8, .7); }
+          .ln_list { list-style: none; margin: 3rem 0 0; padding: 0; }
+          .ln_row { display: flex; align-items: center; min-height: 30vh; border-top: 1px solid rgba(8, 8, 8, .12); }
+          .ln_row:last-child { border-bottom: 1px solid rgba(8, 8, 8, .12); }
+          .ln_link { display: block; width: 100%; padding: 2rem 0; color: var(--black); text-decoration: none; }
+          .ln_title { display: inline; font-family: Coolvetica Condensed, sans-serif; text-transform: uppercase; font-size: clamp(2.5rem, 4.4vw, 4.5rem); line-height: 1.05; letter-spacing: -.01em;
+            background-image: linear-gradient(var(--green), var(--green)); background-repeat: no-repeat; background-position: 0 88%; background-size: 0% 42%;
+            transition: background-size .8s cubic-bezier(.215, .61, .355, 1); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+          [dir="rtl"] .ln_title { background-position: 100% 88%; text-transform: none; }
+          .ln_go { display: flex; align-items: center; gap: .5rem; margin-top: 1rem; font-size: 1.125rem; transform: translateX(0); transition: transform .6s cubic-bezier(.215, .61, .355, 1); }
+          .ln_go img { width: 1rem; height: 1rem; }
+          [dir="rtl"] .ln_go img { transform: scaleX(-1); }
+          .ln_row.is-on .ln_title { background-size: 100% 42%; }
+          .ln_row.is-on .ln_go { transform: translateX(.75rem); }
+          [dir="rtl"] .ln_row.is-on .ln_go { transform: translateX(-.75rem); }
+          .ln_side { position: sticky; top: 14vh; }
+          .ln_media { position: relative; height: 72vh; border-radius: 3.125rem; overflow: hidden; background-color: var(--black); }
+          .ln_video { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); transition: clip-path 1s cubic-bezier(.77, 0, .175, 1); }
+          .ln_video.is-on { clip-path: inset(0 0 0 0); z-index: 2; }
+          .ln_video.was-on { clip-path: inset(0 0 0 0); z-index: 1; }
+          .ln_video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+          .ln_row { opacity: 0; transform: translateY(2.5rem); transition: opacity .8s ease, transform .9s cubic-bezier(.215, .61, .355, 1); }
+          .ln_row.is-in { opacity: 1; transform: none; }
+          @media (max-width: 767px) {
+            .ln { padding: 4.5rem 0; }
+            .ln_grid { grid-template-columns: 1fr; gap: 0; }
+            /* Phones: the card stays at the top with a white strip above it, so the list slides away under it. */
+            .ln_side { order: -1; top: 0; z-index: 3; padding: 5.5rem 0 1rem; background-color: var(--white); }
+            .ln_media { height: 30vh; border-radius: 2.25rem; }
+            .ln_head { margin-top: 1rem; }
+            .ln_list { margin-top: 1.5rem; }
+            .ln_row { min-height: 34vh; }
+            .ln_title { font-size: 2.6rem; }
+          }
+        </style>
+        <div class="container-large">
+          <div class="ln_grid">
+            <div>
+              <div class="ln_head">
+                <h2 class="heading-style-h2" data-i18n="home_langs_title">Cours de langues en ligne</h2>
+                <p class="text-size-medium" data-i18n="home_langs_desc">Des cours en direct avec un professeur, du A1 au C2, avec de la pratique entre les cours. Choisis ta langue pour voir comment se déroule le cours, ses niveaux, les certificats que tu peux préparer et les prix.</p>
+              </div>
+              <ul class="ln_list" data-course-list=""><li class="ln_row"><a class="ln_link" href="/fr/cours-d-anglais-en-ligne"><span class="ln_title">Cours d'anglais en ligne</span><span class="ln_go"><span>Commencer maintenant</span><img src="/images/icon-arrow-light.svg" alt=""></span></a></li><li class="ln_row"><a class="ln_link" href="/fr/cours-d-allemand-en-ligne"><span class="ln_title">Cours d'allemand en ligne</span><span class="ln_go"><span>Commencer maintenant</span><img src="/images/icon-arrow-light.svg" alt=""></span></a></li><li class="ln_row"><a class="ln_link" href="/fr/cours-d-espagnol-en-ligne"><span class="ln_title">Cours d'espagnol en ligne</span><span class="ln_go"><span>Rejoindre la liste d'attente</span><img src="/images/icon-arrow-light.svg" alt=""></span></a></li><li class="ln_row"><a class="ln_link" href="/fr/cours-de-portugais-en-ligne"><span class="ln_title">Cours de portugais en ligne</span><span class="ln_go"><span>Rejoindre la liste d'attente</span><img src="/images/icon-arrow-light.svg" alt=""></span></a></li><li class="ln_row"><a class="ln_link" href="/fr/cours-d-italien-en-ligne"><span class="ln_title">Cours d'italien en ligne</span><span class="ln_go"><span>Rejoindre la liste d'attente</span><img src="/images/icon-arrow-light.svg" alt=""></span></a></li></ul>
+            </div>
+            <div class="ln_side"><div class="ln_media shadow-card" data-course-media="" aria-hidden="true"><div class="ln_video"><video muted="" loop="" playsinline="" preload="none" poster="/videos/pexels-12156230-london-poster-00001.jpg"><source src="/videos/pexels-12156230-london-transcode.mp4" type="video/mp4"><source src="/videos/pexels-12156230-london-transcode.webm" type="video/webm"></video></div><div class="ln_video"><video muted="" loop="" playsinline="" preload="none" poster="/videos/pexels-29955338-berlin-poster-00001.jpg"><source src="/videos/pexels-29955338-berlin-transcode.mp4" type="video/mp4"><source src="/videos/pexels-29955338-berlin-transcode.webm" type="video/webm"></video></div><div class="ln_video"><video muted="" loop="" playsinline="" preload="none" poster="/videos/pexels-20066590-barcelona-poster-00001.jpg"><source src="/videos/pexels-20066590-barcelona-transcode.mp4" type="video/mp4"><source src="/videos/pexels-20066590-barcelona-transcode.webm" type="video/webm"></video></div><div class="ln_video"><video muted="" loop="" playsinline="" preload="none" poster="/videos/pexels-12890902-sintra-poster-00001.jpg"><source src="/videos/pexels-12890902-sintra-transcode.mp4" type="video/mp4"><source src="/videos/pexels-12890902-sintra-transcode.webm" type="video/webm"></video></div><div class="ln_video"><video muted="" loop="" playsinline="" preload="none" poster="/videos/pexels-15245121-rome-poster-00001.jpg"><source src="/videos/pexels-15245121-rome-transcode.mp4" type="video/mp4"><source src="/videos/pexels-15245121-rome-transcode.webm" type="video/webm"></video></div></div></div>
+          </div>
+        </div>
+        <script>
+          (function () {
+            var root = document.currentScript.closest(".ln");
+            var rows = [].slice.call(root.querySelectorAll(".ln_row")), media = [].slice.call(root.querySelectorAll(".ln_video"));
+            if (!rows.length) return;
+            var current = -1;
+            if ("IntersectionObserver" in window) {
+              var seen = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); seen.unobserve(e.target); } });
+              }, { rootMargin: "0px 0px -10% 0px" });
+              rows.forEach(function (r) { seen.observe(r); });
+            } else rows.forEach(function (r) { r.classList.add("is-in"); });
+            function show(k) {
               if (k === current) return;
-              current = k;
-              var size = +panels[k].getAttribute("data-size");
-              dots.forEach(function (d, i) {
-                d.classList.toggle("is-out", i >= size);
+              var prev = current; current = k;
+              rows.forEach(function (r, i) { r.classList.toggle("is-on", i === k); });
+              media.forEach(function (m, i) {
+                var v = m.querySelector("video");
+                m.classList.toggle("is-on", i === k);
+                m.classList.toggle("was-on", i === prev);
+                if (i === k) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
               });
+              // Pause the clip that left once the wipe has covered it.
+              setTimeout(function () { media.forEach(function (m, i) { if (i !== current) { m.classList.remove("was-on"); m.querySelector("video").pause(); } }); }, 1000);
+            }
+            function update() {
+              var mid = window.innerHeight * (window.innerWidth < 768 ? .68 : .5), best = 0, dist = Infinity;
+              rows.forEach(function (r, i) {
+                var b = r.getBoundingClientRect(), d = Math.abs(b.top + b.height / 2 - mid);
+                if (d < dist) { dist = d; best = i; }
+              });
+              show(best);
             }
             window.addEventListener("scroll", update, { passive: true });
             window.addEventListener("resize", update);
